@@ -5,7 +5,7 @@
 
 
 ## Use Case Diagram
-*As a user,...*
+*As a user...*
 
 ### Garden Bed
 - create a new garden bed
