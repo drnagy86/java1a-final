@@ -10,7 +10,7 @@ public class App {
             "Option 3"
         };
         int choice = 0;
-        start: while (true) {
+        while (true) {
             choice = UIUtility.showMenuOptions(menuTitle, prompt, menuOptions, scanner);
             if (choice == 0)
                 continue;
@@ -27,8 +27,7 @@ public class App {
                 case 3:
 
                     break;
-                default:
-                    break start;
+
             }
         }
        System.out.println("\nProgram complete. Goodbye.\n");
