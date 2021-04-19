@@ -14,15 +14,15 @@
 - update information about the garden bed
 - remove a garden bed
 
-### Plants in a Bed
+### Plants in a Garden
 - add plants to a garden bed
-- view the items in a garden bed
-- view information about a specific plant, name, sunlight, when to fertiize, space between
+- view the plants in a garden bed
+- view information about a plant
 - change or modify the plants
 - remove plants from the garden
 
-![Use Case Diagram](images/UseCaseDiagram-Gardinr.jpg)
+![Use Case Diagram](images/Use_Case_Diagram-Gardenr.jpg)
 
 ## Class Diagram
 
- ![Book Class Diagram](https://docs.google.com/drawings/d/1bTVeNn1Igvcs6YdGmi1ubW7BEm9oH4ddHaqmxgRgE84/edit?usp=sharing)
+ ![Book Class Diagram](image/Class_Diagram_Gardenr.jpg)
