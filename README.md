@@ -25,4 +25,4 @@
 
 ## Class Diagram
 
- ![Book Class Diagram](image/Class_Diagram_Gardenr.jpg)
+ ![Book Class Diagram](images/Class_Diagram_Gardenr.jpg)
