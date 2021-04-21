@@ -67,6 +67,7 @@ public class Plant implements Comparable<Plant>{
         this.alive = alive;
     }
     
+    
     public String toString(){
         String result = "";
 
