@@ -6,7 +6,7 @@ public class Plant implements Comparable<Plant>{
     private String plantName;
     private String plantType;
     private LocalDate datePlanted;
-    private int plantHeight;
+    private int plantSpacing;
     private boolean alive;
 
     //default constructor
@@ -14,16 +14,16 @@ public class Plant implements Comparable<Plant>{
         this.plantName = "No plant name";
         this.plantType = "No plant type";
         this.datePlanted = LocalDate.now();
-        this.plantHeight = 0;
+        this.plantSpacing = 0;
         this.alive = false;
     }
 
     //constructor taking in the input
-    public Plant(String plantName, String plantType, String datePlanted, int plantHeight, boolean alive){
+    public Plant(String plantName, String plantType, String datePlanted, int plantSpacing, boolean alive){
         this.plantName = plantName;
         this.plantType = plantType;
         this.datePlanted = Helpers.convertStrToDate(datePlanted);
-        this.plantHeight = plantHeight;
+        this.plantSpacing = plantSpacing;
         this.alive = alive;
     }
 
@@ -51,12 +51,12 @@ public class Plant implements Comparable<Plant>{
         this.datePlanted = Helpers.convertStrToDate(datePlanted);
     }
 
-    public int getPlantHeight() {
-        return plantHeight;
+    public int getPlantSpacing() {
+        return plantSpacing;
     }
 
-    public void setPlantHeight(int plantHeight) {
-        this.plantHeight = plantHeight;
+    public void setPlantSpacing(int plantSpacing) {
+        this.plantSpacing = plantSpacing;
     }
 
     public boolean isAlive() {

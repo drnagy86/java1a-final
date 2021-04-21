@@ -44,8 +44,8 @@ public class Garden {
 
     }
 
-    public void viewPlantsByHeight(){
-        
+    public void viewPlantsBySpacing(){
+
     }
     
 }
