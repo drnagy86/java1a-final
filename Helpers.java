@@ -2,8 +2,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Helpers {
-    
+public class Helpers {    
 
     public static LocalDate convertStrToDate(String dateAdded){        
         LocalDate userDate;
@@ -12,7 +11,7 @@ public class Helpers {
         try {            
             userDate = LocalDate.parse(dateAdded, formatterInput);
                         
-        } catch (DateTimeParseException e) {
+        } catch (Exception e) {
             userDate = LocalDate.now();
         }
 

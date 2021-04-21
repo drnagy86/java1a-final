@@ -1,5 +1,9 @@
+package src;
+
 import java.util.Scanner;
 public class App {
+
+
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         String menuTitle = "Main Menu";
