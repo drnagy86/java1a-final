@@ -5,24 +5,26 @@
 
 
 ## Use Case Diagram
-*As a user...*
+*As a user can...*
 
 ### Garden Bed
-- create a new garden bed
-- specify size
-- view a garden bed
-- update information about the garden bed
-- remove a garden bed
+- add a plant to a garden
+- view plants in a garden
+- update a plant as not alive
+- remove a plant from the garden
 
-### Plants in a Garden
-- add plants to a garden bed
-- view the plants in a garden bed
-- view information about a plant
-- change or modify the plants
-- remove plants from the garden
+### View Plants
+- alphabetically by name
+- that are alive
+- by date planted
+- by height
 
-![Use Case Diagram](images/Use_Case_Diagram-Gardenr.jpg)
+
+![Use Case Diagram Local](images/Use_Case_Diagram-Gardenr.jpg)
+![Use Case Diagram](https://docs.google.com/drawings/d/e/2PACX-1vRJ982LiyhrHEPpIT_DptDWoN8xn-9X23JWYGV00eKWgKodBULUZ1AkV7BYX_EBEcjcBNyJJxBcQdmr/pub?w=830&h=458)
+
 
 ## Class Diagram
 
- ![Book Class Diagram](images/Class_Diagram_Gardenr.jpg)
+ ![Plant Class Diagram Local](images/Class_Diagram_Gardenr.jpg)
+ ![Plant Class Diagram](https://docs.google.com/drawings/d/e/2PACX-1vQzzZqjMwkoDh6ol3l3mQoZHaIBX_3m6gkasnYgcF6ZGSeXqCgNvEqPBQ8eJVStxxTZuEJoxXG_19Hq/pub?w=1164&h=976)
