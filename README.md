@@ -1,11 +1,13 @@
 ## About the project
 
-1. **What is the task?** Menu driven program demonstrating CRUD functions
-2. **What was learned?** What kind of struggles?
+1. **What is the task?** 
+- Menu driven program demonstrating CRUD functions
+2. **What was learned?** 
+- Learned how to be more clear in a case diagram. Specifically, I was thinking about how the plant would need to be put in a list and how I would show that in a case diagram. But, that is a backwards way of thinking about it. It should be actor and case driven.
 
 
 ## Use Case Diagram
-*As a user can...*
+*A user can...*
 
 ### Garden Bed
 - add a plant to a garden
@@ -17,7 +19,7 @@
 - alphabetically by name
 - that are alive
 - by date planted
-- by height
+- by spacing
 
 ![Use Case Diagram](https://docs.google.com/drawings/d/e/2PACX-1vRJ982LiyhrHEPpIT_DptDWoN8xn-9X23JWYGV00eKWgKodBULUZ1AkV7BYX_EBEcjcBNyJJxBcQdmr/pub?w=830&h=458)
 

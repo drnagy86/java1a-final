@@ -2,8 +2,6 @@ package src;
 
 import java.util.Scanner;
 public class App {
-
-
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         String menuTitle = "Main Menu";
@@ -23,7 +21,6 @@ public class App {
             UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);
             switch (choice) {
                 case 1:
-
                     Helpers.testData(scanner);
 
                     break;

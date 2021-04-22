@@ -55,6 +55,53 @@ public class UIUtility {
         return intInput;
     }
 
+    
+    public static int validateIntInput(String input, Scanner scanner) {
+        
+        int intInput;
+
+        while (true) {
+            try {
+                intInput = Integer.parseInt(input);   
+                return intInput;    
+                
+            } catch(Exception e){
+                showErrorMessage("Invalid input", scanner);
+                System.out.print("Please enter a number: ");
+                input = scanner.nextLine();
+                validateIntInput(input, scanner);
+            }
+        }        
+    }
+
+    public static int validateIntInput(String input, int lowBound, int highBound, Scanner in) {
+        
+        int intInput;
+
+        while (true) {
+            try {
+                intInput = Integer.parseInt(input);
+                if (intInput < lowBound || intInput > highBound) {                
+                    throw new NumberFormatException();
+                }    
+                return intInput;
+    
+            } catch (NumberFormatException e) {
+                showErrorMessage("Out of Range", in);
+                System.out.print("Please enter a number: ");
+                input = in.nextLine();
+                validateIntInput(input, lowBound, highBound, in);
+    
+            } catch(Exception e){
+                showErrorMessage("Invalid input", in);
+                System.out.print("Please enter a number: ");
+                input = in.nextLine();
+                validateIntInput(input, lowBound, highBound, in);
+            }
+        }        
+    }
+
+
     /**
      * Displays the supplied message.  If waitForAcknowledement is true, will
      * also call pressEnterToContinue().
