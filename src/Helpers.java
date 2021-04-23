@@ -13,10 +13,11 @@ public class Helpers {
         Plant plant1 = new Plant(); // default
         
         //    public Plant(String plantName, String plantType, String datePlanted, int plantHeight, boolean alive)
-        Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-04-21", 12, true, 12, "Red");
+        Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-05-20", 12, true, 12, "Red");
         Plant plant2 = new Plant("Basil", "Herb", "2021-04-20", 5, true);
         Plant plant3 = new Tomato();
         Plant plant5 = new Plant("Apple", "Fruit", "2019-09-20", 24, true);
+        Plant plant6 = new Plant("Zucchini", "Squash", "2021-04-19", 10, true);
 
 
         Garden garden1 = new Garden();
@@ -25,6 +26,7 @@ public class Helpers {
         garden1.addPlant(plant3);
         garden1.addPlant(plant4);
         garden1.addPlant(plant5);
+        garden1.addPlant(plant6);
 
         // garden1.removePlant(plant1);
         // garden1.removePlant(plant3);        
@@ -33,7 +35,9 @@ public class Helpers {
 
         //garden1.viewPlants();
         //garden1.viewPlantsAlpha();
-        garden1.viewPlantsAlive();
+        //garden1.viewPlantsAlive();
+        //garden1.viewPlantsByDate();
+        //garden1.viewPlantsBySpacing();
         
 
 

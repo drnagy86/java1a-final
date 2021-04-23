@@ -7,9 +7,8 @@
 
 
 ## Use Case Diagram
-*A user can...*
 
-### Garden Bed
+### *A user can...*
 - add a plant to a garden
 - view plants in a garden
 - update a plant as not alive

@@ -73,7 +73,6 @@ public class Plant implements Comparable<Plant>{
             System.out.println("Must choose Yes/No or True/False.");
         }        
     }
-
     
     public String toString(){
         String result = "";
@@ -95,6 +94,16 @@ public class Plant implements Comparable<Plant>{
         }
         return result;
     }
+
+    public int compareToDate(Plant o){
+        int result = this.datePlanted.compareTo(o.datePlanted);
+        
+        if (result == 0) {
+            result = this.plantName.compareToIgnoreCase(o.plantName);
+        }
+        return result;
+    }
+
 
 
 }

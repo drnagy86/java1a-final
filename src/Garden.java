@@ -93,11 +93,41 @@ public class Garden {
     }
 
     public void viewPlantsByDate(){
+        Collections.sort(garden);
+        // answer obtained from:
+        // https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
+        // on 2021-04-23
+
+        garden.sort(Comparator.comparing(plant -> plant.getDatePlanted()));
         
+        //My wrong attempt
+        //Sorts by year correctly by not by month
+        // for (int i = 0; i < garden.size()/2; i++) {
+        //     for (int j = 1; j < garden.size(); j++) {
+
+        //         int result = garden.get(i).getDatePlanted().compareTo((garden.get(j).getDatePlanted()));
+                
+        //         if (result < 0  ) {
+        //             Plant temp = new Plant();
+
+        //             temp = garden.get(i);
+
+        //             garden.remove(garden.get(i));
+
+        //             garden.add(temp);
+
+        //         }
+        //     }
+        // }        
+
+        viewPlants();
+
     }
 
     public void viewPlantsBySpacing(){
-
+        Collections.sort(garden);
+        garden.sort(Comparator.comparing(plant -> plant.getPlantSpacing()));
+        viewPlants();
     }
 
 
