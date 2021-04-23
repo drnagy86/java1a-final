@@ -4,7 +4,7 @@
 - Menu driven program demonstrating CRUD functions
 2. **What was learned?** 
 - Learned how to be more clear in a case diagram. Specifically, I was thinking about how the plant would need to be put in a list and how I would show that in a case diagram. But, that is a backwards way of thinking about it. It should be actor and case driven.
-
+- Learned about the different ways to view sorted objects in a list. It was difficult at first. I had some difficulties sorting an object by its field properties. Learning a little about lambda expression really aided in that.
 
 ## Use Case Diagram
 
