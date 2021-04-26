@@ -38,7 +38,6 @@ public class Tomato extends Plant {
     @Override
     public String toString() {
         String result = super.toString();
-
         result += ", Fruit Size: " + fruitSize;
         result += ", Color: " + color;
 

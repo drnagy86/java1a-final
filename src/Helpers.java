@@ -38,13 +38,63 @@ public class Helpers {
         //garden1.viewPlantsAlive();
         //garden1.viewPlantsByDate();
         //garden1.viewPlantsBySpacing();
-        
-
-
-
         UIUtility.pressEnterToContinue(scanner);
     }
 
+    public static void plantUpdateMenu(Plant plant, Scanner scanner){
+        String[] menuOptions = {
+            "Plant Name",
+            "Plant Type",
+            "Date Planted",
+            "Plant Spacing",
+            "Is alive?"
+        };   
+        
+        int choice = 0;
+        while (true) {
+            choice = UIUtility.showMenuOptions("Update " + plant.getPlantName(), "Choose a property to update", menuOptions, scanner);
+            if (choice == 0)
+                continue;
+            if (choice == menuOptions.length + 1)
+                break;
+            UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);
+            switch (choice) {
+                case 1:
+                    plant.setPlantName(scanner.nextLine());
+                    printNPause(plant, scanner);               
+                    break;
+                case 2:
+                    plant.setPlantType(scanner.nextLine());
+                    printNPause(plant, scanner);
+                    break;
+                case 3:
+                    plant.setDatePlanted(scanner.nextLine());
+                    printNPause(plant, scanner);
+                    break;
+                case 4:
+
+                    int plantSpacing = UIUtility.validateIntInput(Helpers.input(scanner, "Enter the spacing"), 24, scanner);
+                    plant.setPlantSpacing(plantSpacing);
+                    printNPause(plant, scanner);
+                    break;
+                case 5:
+                    String aliveString = Helpers.input(scanner, "Is the plant alive [1-yes, 2-No]");
+                    // int aliveInt = UIUtility.validateIntInput(aliveString, 2, scanner);
+                    boolean alive = aliveString.equals("1") || aliveString.trim().toLowerCase().charAt(0) == 'y' ? true : false;
+
+                    plant.setAlive(alive);
+                    printNPause(plant, scanner);
+                    break;
+            }
+
+            
+        }
+    }
+
+    public static void printNPause(Plant plant, Scanner scanner){
+        System.out.println(plant.toString());
+        UIUtility.pressEnterToContinue(scanner);
+    }
 
     public static LocalDate convertStrToDate(String dateAdded){        
         LocalDate userDate;
@@ -56,9 +106,12 @@ public class Helpers {
         } catch (DateTimeParseException e) {
             userDate = LocalDate.now();
         }
-
         return userDate;
+    }
 
+    public static String input(Scanner scanner, String prompt){
+        System.out.print(prompt + ": ");
+        return scanner.nextLine();
     }
 
     public static int validateIntInput(String input) {

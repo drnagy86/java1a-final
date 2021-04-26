@@ -55,23 +55,16 @@ public class Plant implements Comparable<Plant>{
         return plantSpacing;
     }
 
-    public void setPlantSpacing(String plantSpacing) {
-        this.plantSpacing = Helpers.validateIntInput(plantSpacing, 0 , 24);
+    public void setPlantSpacing(int plantSpacing) {
+        this.plantSpacing = plantSpacing;
     }
 
     public boolean isAlive() {
         return alive;
     }
 
-    public void setAlive(String alive) {        
-        alive = alive.trim().substring(0, 1).toLowerCase();
-        if (alive.equals("y") || alive.equals("t")) {
-            this.alive = true;            
-        } else if(alive.equals("n") || alive.equals("f")){
-            this.alive = false;
-        } else {
-            System.out.println("Must choose Yes/No or True/False.");
-        }        
+    public void setAlive(Boolean alive) {
+        this.alive = alive;
     }
     
     public String toString(){
@@ -80,7 +73,8 @@ public class Plant implements Comparable<Plant>{
         result += "Name: " + plantName;
         result += ", Plant Type: " + plantType;
         result += ", Date Planted: " + datePlanted;
-
+        result += ", Plant Spacing: " + plantSpacing;
+        result += ", Is alive: " + alive;
         return result;
     }
 

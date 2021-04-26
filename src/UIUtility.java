@@ -11,7 +11,7 @@ public class UIUtility {
      * @param in a Scanner object
      * @return the user's response
      */
-    public static int showMenuOptions(String menuTitle, String prompt, String[] menuOptions, Scanner in) {
+    public static int showMenuOptions(String menuTitle, String prompt, String[] menuOptions, Scanner scanner) {
         showMenuTitle(menuTitle);
         int count = 1;
         for (String menuOption : menuOptions) {
@@ -19,8 +19,8 @@ public class UIUtility {
         }
         System.out.println(count + ": Exit");
         System.out.print("\n" + prompt + " ");
-        String input = in.nextLine().trim();
-        int result = validateIntInput(input, menuOptions.length + 1, in);
+        String input = scanner.nextLine().trim();
+        int result = validateIntInput(input, menuOptions.length + 1, scanner);
         return result;
     }
 
@@ -41,7 +41,7 @@ public class UIUtility {
      * @return The string converted to an integer, or 0 if invalid
      */
 
-    public static int validateIntInput(String input, int highBound, Scanner in) {
+    public static int validateIntInput(String input, int highBound, Scanner scanner) {
         int intInput = 0;
         try {
             intInput = Integer.parseInt(input);
@@ -50,7 +50,7 @@ public class UIUtility {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            showErrorMessage("Invalid input", in);
+            showErrorMessage("Invalid input", scanner);
         }
         return intInput;
     }
@@ -110,9 +110,9 @@ public class UIUtility {
      * @param in a Scanner object
      */
 
-    public static void showErrorMessage(String message, Scanner in) {
+    public static void showErrorMessage(String message, Scanner scanner) {
         System.out.println("ERROR: " + message);
-        pressEnterToContinue(in);
+        pressEnterToContinue(scanner);
     }
 
     /**
@@ -121,9 +121,9 @@ public class UIUtility {
      * @param in a Scanner object
      */
 
-    public static void pressEnterToContinue(Scanner in) {
+    public static void pressEnterToContinue(Scanner scanner) {
         System.out.print("\nPress Enter to continue... ");
-        in.nextLine();
+        scanner.nextLine();
     }
 
     /**

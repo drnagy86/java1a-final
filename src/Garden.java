@@ -7,83 +7,47 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Garden {
-    private List<Plant> garden;
+    
+    private static final int CAPACITY = 12;
+    private static List<Plant> garden = new ArrayList<Plant>(CAPACITY);
 
-    public Garden(){
-        // number limits the number in the list
-        garden = new ArrayList<Plant>(12);
-
-    }
-
-    public void addPlant(Plant plant){
+    public static void addPlant(Plant plant){
         garden.add(plant);
     }
  
-    public void removePlant(Plant plant){
+    public static void removePlant(Plant plant){
         garden.remove(plant);
     }
 
-    public void updatePlant(Plant plant, Scanner scanner){
-        // A nice little menu maybe? or at least update the relevant info
-        //public static int showMenuOptions(String menuTitle, String prompt, String[] menuOptions, Scanner in)
-        //    private String plantName;
-        // private String plantType;
-        // private LocalDate datePlanted;
-        // private int plantSpacing;
-        // private boolean alive;
+    public static void updatePlant(Scanner scanner){
 
-        String[] menuOptions = {
-            "Plant Name",
-            "Plant Type",
-            "Date Planted",
-            "Plant Spacing",
-            "Is alive?"
-        };   
-        
-        int choice = 0;
-        while (true) {
-            choice = UIUtility.showMenuOptions("Update Plant", "Choose a property to update", menuOptions, scanner);
-            if (choice == 0)
-                continue;
-            if (choice == menuOptions.length + 1)
+        viewPlantsAlpha();
+        // string this up in the menu options so no typing is required.
+        String plantString = Helpers.input(scanner, "Choose a plant");
+
+        for (Plant plant : garden) {
+            if (plant.getPlantName().equals(plantString)) {
+                Helpers.plantUpdateMenu(plant, scanner);
                 break;
-            UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);
-            switch (choice) {
-                case 1:
-                    plant.setPlantName(scanner.nextLine());                 
-                    break;
-                case 2:
-                    plant.setPlantType(scanner.nextLine());
-                    break;
-                case 3:
-                    plant.setDatePlanted(scanner.nextLine());
-                    break;
-                case 4:
-                    plant.setPlantSpacing(scanner.nextLine());
-                    break;
-                case 5:
-                    plant.setAlive(scanner.nextLine());
-                    break;
             }
         }
-
-
     }
 
-    public void viewPlants(){
+    
+
+    public static void viewPlants(){
         //for loop that iterates and prints
         for (Plant plant : garden) {
             System.out.println(plant);
         }
-
     }
 
-    public void viewPlantsAlpha(){
+    public static void viewPlantsAlpha(){
         Collections.sort(garden);
         viewPlants();
     }
 
-    public void viewPlantsAlive(){
+    public static void viewPlantsAlive(){
         Collections.sort(garden);
         for (Plant plant : garden) {
             if (plant.isAlive()) {
@@ -92,7 +56,7 @@ public class Garden {
         }
     }
 
-    public void viewPlantsByDate(){
+    public static void viewPlantsByDate(){
         Collections.sort(garden);
         // answer obtained from:
         // https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
@@ -124,11 +88,13 @@ public class Garden {
 
     }
 
-    public void viewPlantsBySpacing(){
+    public static void viewPlantsBySpacing(){
         Collections.sort(garden);
         garden.sort(Comparator.comparing(plant -> plant.getPlantSpacing()));
         viewPlants();
     }
+
+    // move a plant method, swap a plant method
 
 
     
