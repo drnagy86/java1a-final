@@ -3,42 +3,38 @@ package src;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class Helpers {
-    
-    public static void testData(Scanner scanner){
 
-        Plant plant1 = new Plant(); // default
-        
-        //    public Plant(String plantName, String plantType, String datePlanted, int plantHeight, boolean alive)
-        Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-05-20", 12, true, 12, "Red");
-        Plant plant2 = new Plant("Basil", "Herb", "2021-04-20", 5, true);
-        Plant plant3 = new Tomato();
-        Plant plant5 = new Plant("Apple", "Fruit", "2019-09-20", 24, true);
-        Plant plant6 = new Plant("Zucchini", "Squash", "2021-04-19", 10, true);
+    public static Plant selectPlantFromGarden(Scanner scanner){
+        String[] menuOptions = new String[Garden.getCountInGarden()];
+        List<Plant> garden = Garden.getGarden();
+        Collections.sort(garden);
 
+        for (int i = 0; i < menuOptions.length ; i++) {
+            menuOptions[i] = garden.get(i).getPlantName() + " " + garden.get(i).getDatePlanted();
+        }
 
-        Garden garden1 = new Garden();
-        garden1.addPlant(plant1);
-        garden1.addPlant(plant2);
-        garden1.addPlant(plant3);
-        garden1.addPlant(plant4);
-        garden1.addPlant(plant5);
-        garden1.addPlant(plant6);
-
-        // garden1.removePlant(plant1);
-        // garden1.removePlant(plant3);        
-
-        //garden1.updatePlant(plant4, scanner);
-
-        //garden1.viewPlants();
-        //garden1.viewPlantsAlpha();
-        //garden1.viewPlantsAlive();
-        //garden1.viewPlantsByDate();
-        //garden1.viewPlantsBySpacing();
-        UIUtility.pressEnterToContinue(scanner);
+        int choice = 0;
+        Plant plant = null;
+        while (true) {
+            choice = UIUtility.showMenuOptions("Garden" , "Choose a plant", menuOptions, scanner);
+            // if (choice == 0)
+            //     continue;
+            if (choice == menuOptions.length + 1)
+                break;
+            UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);
+            // grab the plant that the user selected
+            if (choice >= 0 && choice <= menuOptions.length) {
+                plant = garden.get(choice - 1);
+                break;
+            }
+        }
+        return plant;
     }
 
     public static void plantUpdateMenu(Plant plant, Scanner scanner){
@@ -53,8 +49,8 @@ public class Helpers {
         int choice = 0;
         while (true) {
             choice = UIUtility.showMenuOptions("Update " + plant.getPlantName(), "Choose a property to update", menuOptions, scanner);
-            if (choice == 0)
-                continue;
+            // if (choice == 0)
+            //     continue;
             if (choice == menuOptions.length + 1)
                 break;
             UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);

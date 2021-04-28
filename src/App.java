@@ -11,7 +11,7 @@ public class App {
             "Update a Plant",
             "Remove a Plant",
             "Seed objects",
-            "View by Alhpa",
+            "View Alphabetically",
             "View Alive Plants",
             "View Plants by Date",
             "View Plant by Spacing"
@@ -27,87 +27,54 @@ public class App {
             switch (choice) {
                 case 1:
                     // Add a plant
-                    addPlant(scanner);
-
+                    Garden.addPlant(scanner);
+                    UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 2:
                     //View Garden
                     //View Menu
                     Garden.viewPlants();
                     UIUtility.pressEnterToContinue(scanner);
-
                     break;
                 case 3:
                     //Update a Plant
                     Garden.updatePlant(scanner);
-
+                    UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 4:
                     //remove a plant
+                    if (Garden.getCountInGarden() == 0) {
+                        System.out.println("There is nothing in the garden.");
+                    }
+                    else{                                                    
+                        Garden.removePlant(scanner);  
+                        UIUtility.pressEnterToContinue(scanner);                  
+                    }
                     break;
                 case 5:
                     //seed data
-                    seedData();
+                    Garden.seedData();
+                    UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 6:
                     Garden.viewPlantsAlpha();
+                    UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 7:
                     Garden.viewPlantsAlive();
+                    UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 8:
                      Garden.viewPlantsByDate();
+                     UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 9:
                     Garden.viewPlantsBySpacing();
+                    UIUtility.pressEnterToContinue(scanner);
                     break;
-
             }
         }
        System.out.println("\nProgram complete. Goodbye.\n");
        scanner.close();
     }
-
-    private static void seedData() {
-        Plant plant1 = new Plant(); // default
-        Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-05-20", 12, true, 12, "Red");
-        Plant plant2 = new Plant("Basil", "Herb", "2021-04-20", 5, true);
-        Plant plant3 = new Tomato();
-        Plant plant5 = new Plant("Apple", "Fruit", "2019-09-20", 24, true);
-        Plant plant6 = new Plant("Zucchini", "Squash", "2021-04-19", 10, true);
-
-        Garden.addPlant(plant1);
-        Garden.addPlant(plant2);
-        Garden.addPlant(plant3);
-        Garden.addPlant(plant4);
-        Garden.addPlant(plant5);
-        Garden.addPlant(plant6);
-    }
-    
-    public static void addPlant(Scanner scanner){
-
-        String plantName = Helpers.input(scanner, "Write the plant name");
-        String plantType = Helpers.input(scanner, "Write the plant type");
-        String datePlanted = Helpers.input(scanner, "Enter the date planted [YYYY-MM-DD]");
-        int plantSpacing = UIUtility.validateIntInput(Helpers.input(scanner, "Enter the spacing"), 24, scanner);
-        String aliveString = Helpers.input(scanner, "Is the plant alive [1-yes, 2-No]");
-        // int aliveInt = UIUtility.validateIntInput(aliveString, 2, scanner);
-        boolean alive = aliveString.equals("1") || aliveString.trim().toLowerCase().charAt(0) == 'y' ? true : false;
-
-        Plant plant = new Plant();
-
-        plant.setPlantName(plantName);
-        plant.setPlantType(plantType);
-        plant.setDatePlanted(datePlanted);
-        plant.setPlantSpacing(plantSpacing);
-        plant.setAlive(alive);
-
-        Garden.addPlant(plant);
-
-        System.out.println("Book added.");
-        UIUtility.pressEnterToContinue(scanner);
-
-
-    }
-    
 }

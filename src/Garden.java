@@ -10,30 +10,88 @@ public class Garden {
     
     private static final int CAPACITY = 12;
     private static List<Plant> garden = new ArrayList<Plant>(CAPACITY);
+    private static int countInGarden = 0;
 
-    public static void addPlant(Plant plant){
-        garden.add(plant);
+    public static void addPlant(Scanner scanner){
+
+        if(!isFull()){
+
+            System.out.println("Add a regular plant[1] or tomato[2]?");
+            String choice = scanner.nextLine();            
+            
+            String plantName = Helpers.input(scanner, "Write the plant name");
+            String plantType = Helpers.input(scanner, "Write the plant type");
+            String datePlanted = Helpers.input(scanner, "Enter the date planted [YYYY-MM-DD]");
+            int plantSpacing = UIUtility.validateIntInput(Helpers.input(scanner, "Enter the spacing"), 24, scanner);
+            String aliveString = Helpers.input(scanner, "Is the plant alive [1-yes, 2-No]");
+            boolean alive = aliveString.equals("1") || aliveString.trim().toLowerCase().charAt(0) == 'y' ? true : false;
+
+            Plant plant = null;
+            if (choice.equals("2")) {
+                int fruitSize = UIUtility.validateIntInput(Helpers.input(scanner, "Enter the size in ounces"), 10, scanner);
+                String color = Helpers.input(scanner, "Enter the color");
+                plant = new Tomato(plantName, plantType, datePlanted, plantSpacing, alive, fruitSize, color);
+            }
+            else{
+                plant = new Plant(plantName, plantType, datePlanted, plantSpacing, alive);
+            }     
+            garden.add(plant);    
+            System.out.println("Plant added.");
+        }
+        else{
+            System.out.println("Garden is full.");
+        }
     }
  
-    public static void removePlant(Plant plant){
+    public static void removePlant(Scanner scanner){
+        Plant plant = Helpers.selectPlantFromGarden(scanner);
+        System.out.println("Removed\n" + plant.toString());
         garden.remove(plant);
     }
 
     public static void updatePlant(Scanner scanner){
 
-        viewPlantsAlpha();
-        // string this up in the menu options so no typing is required.
-        String plantString = Helpers.input(scanner, "Choose a plant");
-
-        for (Plant plant : garden) {
-            if (plant.getPlantName().equals(plantString)) {
-                Helpers.plantUpdateMenu(plant, scanner);
-                break;
-            }
-        }
+        Plant plant = Helpers.selectPlantFromGarden(scanner);
+        Helpers.plantUpdateMenu(plant, scanner);
     }
 
+    public static void seedData() {
+
+        if (isFull() || getCountInGarden() != 0){
+            System.out.println("The garden is too full for this testing method.");
+        }        
+        else{
+
+            //Plant plant1 = new Plant(); // default
+            Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-05-20", 12, true, 12, "Red");
+            Plant plant2 = new Plant("Basil", "Herb", "2021-04-20", 5, true);
+            Plant plant3 = new Tomato();
+            Plant plant5 = new Plant("Apple", "Fruit", "2019-09-20", 24, true);
+            Plant plant6 = new Plant("Zucchini", "Squash", "2021-04-19", 10, true);
+            Plant watermelon = new Plant("Watermelon", "Fruit", "2021-05-28", 12, true);
+            Plant cilantro = new Plant("Cilantro", "Herb", "2021-04-28", 5, true);
+            Plant mint = new Plant("Mint", "Herb", "2021-04-30", 5, true);
+            Plant jalapeno = new Plant("Jalapeno", "Pepper", "2021-06-01", 6, true);
+            Plant heirloom = new Tomato("Heirloom Tomatoes", "Fruit", "2021-05-13", 8, true, 5, "Red, Green, Yellow");
+            Plant cherryTom = new Tomato("Cherry Tomatoes", "Fruit", "2021-05-13", 8, true, 1, "Red");
     
+            //addPlant(plant1);
+            garden.add(plant2);
+            garden.add(plant3);
+            garden.add(plant4);
+            garden.add(plant5);
+            garden.add(plant6);
+            garden.add(watermelon);
+            garden.add(cilantro);
+            garden.add(mint);
+            garden.add(jalapeno);
+            garden.add(heirloom);
+            garden.add(cherryTom);
+        
+            
+            System.out.println("" + getCountInGarden() + " plants added.");
+        }      
+    }   
 
     public static void viewPlants(){
         //for loop that iterates and prints
@@ -96,6 +154,18 @@ public class Garden {
 
     // move a plant method, swap a plant method
 
+    public static int getCountInGarden(){
+        countInGarden = garden.size();
+        return countInGarden;
+    }
+
+    public static boolean isFull(){
+        return (getCountInGarden() == CAPACITY ? true : false);
+    }
+
+    public static List<Plant> getGarden(){
+        return garden;
+    }
 
     
 }
