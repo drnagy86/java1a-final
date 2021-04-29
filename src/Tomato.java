@@ -41,8 +41,6 @@ public class Tomato extends Plant {
         result += ", Fruit Size: " + fruitSize;
         result += ", Color: " + color;
 
-
-
         return result;
         
     }

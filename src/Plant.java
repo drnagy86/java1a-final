@@ -75,6 +75,7 @@ public class Plant implements Comparable<Plant>{
         result += ", Date Planted: " + datePlanted;
         result += ", Plant Spacing: " + plantSpacing;
         result += ", Is alive: " + alive;
+
         return result;
     }
 

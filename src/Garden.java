@@ -43,16 +43,42 @@ public class Garden {
         }
     }
  
-    public static void removePlant(Scanner scanner){
-        Plant plant = Helpers.selectPlantFromGarden(scanner);
-        System.out.println("Removed\n" + plant.toString());
+    public static void removePlant(Plant plant){
         garden.remove(plant);
     }
 
-    public static void updatePlant(Scanner scanner){
+    public static void updatePlant(Plant plant, int choice, Scanner scanner){
+        //Marc, I didn't like using this and ended up just setting the
+        // properties in the update plant menu because it felt more clear.
+        // The method is still here though in case it could be usefull.
 
-        Plant plant = Helpers.selectPlantFromGarden(scanner);
-        Helpers.plantUpdateMenu(plant, scanner);
+        switch (choice) {
+            case 1:
+                plant.setPlantName(scanner.nextLine());
+                            
+                break;
+            case 2:
+                plant.setPlantType(scanner.nextLine());
+                //printNPause(plant, scanner);
+                break;
+            case 3:
+                plant.setDatePlanted(scanner.nextLine());
+                
+                break;
+            case 4:
+
+                int plantSpacing = UIUtility.validateIntInput(Helpers.input(scanner, "Enter the spacing"), 24, scanner);
+                plant.setPlantSpacing(plantSpacing);
+                
+                break;
+            case 5:
+                String aliveString = Helpers.input(scanner, "Is the plant alive [1-yes, 2-No]");
+                boolean alive = aliveString.equals("1") || aliveString.trim().toLowerCase().charAt(0) == 'y' ? true : false;
+                plant.setAlive(alive);
+                
+                break;
+        }
+
     }
 
     public static void seedData() {
@@ -96,6 +122,7 @@ public class Garden {
     public static void viewPlants(){
         //for loop that iterates and prints
         for (Plant plant : garden) {
+
             System.out.println(plant);
         }
     }
