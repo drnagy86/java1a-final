@@ -16,8 +16,7 @@ public class Plant implements Comparable<Plant>{
         this.plantType = "No plant type";
         this.datePlanted = LocalDate.now();
         this.plantSpacing = 0;
-        this.alive = false;
-        //this.gardenCoords = {-1,-1};
+        this.alive = false;        
     }
 
     //constructor taking in the input
@@ -26,8 +25,7 @@ public class Plant implements Comparable<Plant>{
         this.plantType = plantType;
         this.datePlanted = Helpers.convertStrToDate(datePlanted);
         this.plantSpacing = plantSpacing;
-        this.alive = alive;
-        //this.gardenCoords = null;
+        this.alive = alive;        
     }
 
     public String getPlantName() {
@@ -109,7 +107,5 @@ public class Plant implements Comparable<Plant>{
         }
         return result;
     }
-
-
 
 }

@@ -87,37 +87,30 @@ public class Garden {
     }
 
     public static void updatePlant(Plant plant, int choice, Scanner scanner){
-        //Marc, I didn't like using this and ended up just setting the
-        // properties in the update plant menu because it felt more clear.
+        //Marc, I didn't use this and ended up just setting the
+        // properties in the update plant menu.
         // The method is still here though in case it could be usefull.
 
         switch (choice) {
             case 1:
-                plant.setPlantName(scanner.nextLine());
-                            
+                plant.setPlantName(scanner.nextLine()); 
                 break;
             case 2:
                 plant.setPlantType(scanner.nextLine());
-                //printNPause(plant, scanner);
                 break;
             case 3:
                 plant.setDatePlanted(scanner.nextLine());
-                
                 break;
             case 4:
-
                 int plantSpacing = UIUtility.validateIntInput(Helpers.input(scanner, "Enter the spacing"), 24, scanner);
                 plant.setPlantSpacing(plantSpacing);
-                
                 break;
             case 5:
                 String aliveString = Helpers.input(scanner, "Is the plant alive [1-yes, 2-No]");
                 boolean alive = aliveString.equals("1") || aliveString.trim().toLowerCase().charAt(0) == 'y' ? true : false;
-                plant.setAlive(alive);
-                
+                plant.setAlive(alive);                
                 break;
         }
-
     }
 
     public static void seedData() {
@@ -125,8 +118,8 @@ public class Garden {
         if (isFull() || getCountInGarden() != 0){
             System.out.println("The garden is too full for this testing method.");
         }        
-        else{
-
+        else
+        {
             //Plant plant1 = new Plant(); // default
             Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-05-20", 12, true, 12, "Red");
             Plant plant2 = new Plant("Basil", "Herb", "2021-04-20", 5, true);
@@ -151,8 +144,7 @@ public class Garden {
             garden.add(mint);
             garden.add(jalapeno);
             garden.add(heirloom);
-            garden.add(cherryTom);
-        
+            garden.add(cherryTom);        
             
             System.out.println("" + getCountInGarden() + " plants added.");
         }      
@@ -161,7 +153,6 @@ public class Garden {
     public static void viewPlants(){
         //for loop that iterates and prints
         for (Plant plant : garden) {
-
             System.out.println(plant);
         }
     }
@@ -206,8 +197,7 @@ public class Garden {
 
         //         }
         //     }
-        // }        
-
+        // }
         viewPlants();
 
     }
@@ -235,12 +225,7 @@ public class Garden {
             }            
         }
         return plantsToPlant;
-
-
-
-    }
-
-    
+    }    
 
     public static int getCountInGarden(){
         countInGarden = garden.size();
@@ -253,7 +238,5 @@ public class Garden {
 
     public static List<Plant> getGarden(){
         return garden;
-    }
-
-    
+    }    
 }

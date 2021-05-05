@@ -230,16 +230,15 @@ public class UIUtility {
         String row4Format = " %-15s | 10 %-14s | 11 %-14s | 12 %-14s | %n";        
         
         System.out.println("Menu Options:     A virtual representation of a 4x3 foot garden bed.");
-        printFirstFormatLine();     
 
+        printFirstFormatLine();
         System.out.format(row1Format, menuOptions[0], gardenBed[0][0], gardenBed[0][1] , gardenBed[0][2]);
         printFormatLine();   
         System.out.format(row2Format, menuOptions[1], gardenBed[1][0], gardenBed[1][1] , gardenBed[1][2]);
         printFormatLine();   
         System.out.format(row3Format, menuOptions[2],  gardenBed[2][0], gardenBed[2][1] , gardenBed[2][2]);
         printFormatLine();   
-        System.out.format(row4Format, menuOptions[3],  gardenBed[3][0], gardenBed[3][1] , gardenBed[3][2]);
-        
+        System.out.format(row4Format, menuOptions[3],  gardenBed[3][0], gardenBed[3][1] , gardenBed[3][2]);        
         printFormatLine();
 
         System.out.print("\n" + "Choose an option to modify the bed:" + " ");

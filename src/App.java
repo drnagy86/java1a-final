@@ -15,7 +15,8 @@ public class App {
         };
         int choice = 0;
 
-        Garden.seedData();
+        // Added this as a convenience for testing for myself
+        //Garden.seedData();
 
         while (true) {
             choice = UIUtility.showMenuOptions(menuTitle, prompt, menuOptions, scanner);

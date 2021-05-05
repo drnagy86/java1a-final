@@ -2,8 +2,7 @@ package src;
 
 public class Tomato extends Plant {
     private int fruitSize;
-    private String color;
-    // could add fruit size and color
+    private String color;    
 
     public Tomato() {
         //call to the parent constructor
@@ -41,10 +40,6 @@ public class Tomato extends Plant {
         result += ", Fruit Size: " + fruitSize;
         result += ", Color: " + color;
 
-        return result;
-        
+        return result;        
     }
-
-
-
 }
