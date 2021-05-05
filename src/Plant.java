@@ -8,6 +8,7 @@ public class Plant implements Comparable<Plant>{
     private LocalDate datePlanted;
     private int plantSpacing;
     private boolean alive;
+    private int[] gardenCoords ={-1,-1};
 
     //default constructor
     public Plant(){
@@ -16,6 +17,7 @@ public class Plant implements Comparable<Plant>{
         this.datePlanted = LocalDate.now();
         this.plantSpacing = 0;
         this.alive = false;
+        //this.gardenCoords = {-1,-1};
     }
 
     //constructor taking in the input
@@ -25,6 +27,7 @@ public class Plant implements Comparable<Plant>{
         this.datePlanted = Helpers.convertStrToDate(datePlanted);
         this.plantSpacing = plantSpacing;
         this.alive = alive;
+        //this.gardenCoords = null;
     }
 
     public String getPlantName() {
@@ -65,6 +68,14 @@ public class Plant implements Comparable<Plant>{
 
     public void setAlive(Boolean alive) {
         this.alive = alive;
+    }
+
+    public int[] getGardenCoords(){
+        return gardenCoords;
+    }
+
+    public void setGardenCoords(int[] xyCoords){
+        this.gardenCoords = xyCoords;
     }
     
     public String toString(){

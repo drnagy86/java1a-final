@@ -11,6 +11,45 @@ public class Garden {
     private static final int CAPACITY = 12;
     private static List<Plant> garden = new ArrayList<Plant>(CAPACITY);
     private static int countInGarden = 0;
+    // private static String[][] gardenBed = new String[4][3];
+    private static String[][] gardenBed = {
+        {"","",""},
+        {"","",""},
+        {"","",""},
+        {"","",""}
+    };
+
+    public static String[][] getGardenBed(){
+        return gardenBed;
+    }
+
+    public static String getGardenBedByCoord(int[] xyCoords){
+
+        int x = xyCoords[0];
+        int y = xyCoords[1];
+
+        return gardenBed[x][y];
+    }
+
+    public static void setGardenBedByCoord(int[] xyCoords, String string){
+        gardenBed[xyCoords[0]][xyCoords[1]] = string;
+    }
+
+    public static int getPlantIndexByCoord(int[] xyCoords){
+        
+        int index = -1;
+        int x = xyCoords[0];
+        int y = xyCoords[1];
+        
+        for (int i = 0; i < garden.size(); i++) {
+
+            if (garden.get(i).getGardenCoords()[0] == x &&
+                garden.get(i).getGardenCoords()[1] == y) {
+                index = i;                            
+            }
+        }
+        return index;
+    }
 
     public static void addPlant(Scanner scanner){
 
@@ -91,7 +130,7 @@ public class Garden {
             //Plant plant1 = new Plant(); // default
             Plant plant4 = new Tomato("Big Beef", "Fruit", "2021-05-20", 12, true, 12, "Red");
             Plant plant2 = new Plant("Basil", "Herb", "2021-04-20", 5, true);
-            Plant plant3 = new Tomato();
+            //Plant plant3 = new Tomato();
             Plant plant5 = new Plant("Apple", "Fruit", "2019-09-20", 24, true);
             Plant plant6 = new Plant("Zucchini", "Squash", "2021-04-19", 10, true);
             Plant watermelon = new Plant("Watermelon", "Fruit", "2021-05-28", 12, true);
@@ -103,7 +142,7 @@ public class Garden {
     
             //addPlant(plant1);
             garden.add(plant2);
-            garden.add(plant3);
+            //garden.add(plant3);
             garden.add(plant4);
             garden.add(plant5);
             garden.add(plant6);
@@ -179,7 +218,29 @@ public class Garden {
         viewPlants();
     }
 
-    // move a plant method, swap a plant method
+    public static List<Plant> getPlantsToPlant(){
+        
+        List<Plant> plantsToPlant = new ArrayList();
+
+        Collections.sort(garden);
+        for (Plant plant : garden) {
+
+            int x = plant.getGardenCoords()[0];
+            int y = plant.getGardenCoords()[1];
+
+            boolean test = (x == -1 && y == -1);
+
+            if (test) {
+                plantsToPlant.add(plant);
+            }            
+        }
+        return plantsToPlant;
+
+
+
+    }
+
+    
 
     public static int getCountInGarden(){
         countInGarden = garden.size();

@@ -9,12 +9,15 @@ public class App {
         String prompt = "Select an option:";
         String[] menuOptions = {
             "Add a Plant",
-            "View Garden",
+            "View Plants in Garden",
             "Update a Plant",
             "Remove a Plant",
-            "Seed objects"
+            "Plant positions in Garden Bed"
         };
         int choice = 0;
+
+        Garden.seedData();
+
         while (true) {
             choice = UIUtility.showMenuOptions(menuTitle, prompt, menuOptions, scanner);
             if (choice == 0)
@@ -31,7 +34,7 @@ public class App {
                 case 2:
                     //View Menu
                     viewsMenu(scanner);
-                    UIUtility.pressEnterToContinue(scanner);
+                    //UIUtility.pressEnterToContinue(scanner);
                     break;
                 case 3:
                     //Update a Plant
@@ -39,9 +42,9 @@ public class App {
                         System.out.println("There are no plants in the garden.");
                     }
                     else{
-                        Plant plant = selectPlantFromGarden(scanner);
+                        Plant plant = selectPlantFromGarden(scanner,Garden.getGarden());
                         plantFieldMenu(plant, scanner);
-                        UIUtility.pressEnterToContinue(scanner);
+                        //UIUtility.pressEnterToContinue(scanner);
                     }
                     break;
                 case 4:
@@ -50,15 +53,20 @@ public class App {
                         System.out.println("There is nothing in the garden.");
                     }
                     else{                                                    
-                        Plant plant = selectPlantFromGarden(scanner);
+                        Plant plant = selectPlantFromGarden(scanner,Garden.getGarden());
+                        Garden.removePlant(plant);
                         System.out.println("Removed\n" + plant.toString());                          
                         UIUtility.pressEnterToContinue(scanner);                  
                     }
                     break;
                 case 5:
-                    //seed data
-                    Garden.seedData();
-                    UIUtility.pressEnterToContinue(scanner);
+                     // "plant" the items in a garden bed
+                    // select plants to put in a garden bed
+                    // limit the size by space
+                    // add, remove, swap
+                    
+                    addRemoveUpdateBed(scanner, Garden.getGardenBed());
+                    
                     break;
             }
         }
@@ -66,12 +74,11 @@ public class App {
        scanner.close();
     }
 
-    public static Plant selectPlantFromGarden(Scanner scanner){
-
+    public static Plant selectPlantFromGarden(Scanner scanner, List<Plant> garden){
         
-        String[] menuOptions = new String[Garden.getCountInGarden()];
-        List<Plant> garden = Garden.getGarden();
-        Collections.sort(garden);
+        String[] menuOptions = new String[garden.size()];
+        // List<Plant> garden = Garden.getGarden();
+        // Collections.sort(garden);
 
         for (int i = 0; i < menuOptions.length ; i++) {
             menuOptions[i] = garden.get(i).getPlantName() + " " + garden.get(i).getDatePlanted();
@@ -81,13 +88,14 @@ public class App {
         Plant plant = null;
         while (true) {
             choice = UIUtility.showMenuOptions("Garden" , "Choose a plant: ", menuOptions, scanner);
-            // if (choice == 0)
-            //     continue;
+            if (choice == 0)
+                continue;
             if (choice == menuOptions.length + 1)
                 break;
             UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);
             // grab the plant that the user selected
-            if (choice >= 0 && choice <= menuOptions.length) {
+
+            if (choice >= 1 && choice <= menuOptions.length) {
                 plant = garden.get(choice - 1);
                 break;
             }
@@ -139,12 +147,8 @@ public class App {
                     plant.setAlive(alive);
                     printNPause(plant, scanner);
                     break;
-            }
-
-            
-        }
-
-        
+            }            
+        }        
     }
 
     public static void viewsMenu(Scanner scanner){
@@ -184,6 +188,103 @@ public class App {
             }            
         }        
     }
+
+    public static void addRemoveUpdateBed(Scanner scanner, String[][] coords){
+        
+        int choice = 0;
+        boolean cont = true;
+        while (cont) {
+
+            choice = UIUtility.printGardenBed(Garden.getGardenBed(), scanner);
+
+            if (choice == 0)
+                continue;
+            if (choice == 5)
+                break;        
+            switch (choice) {
+                case 1:
+                    //add
+                    Plant plant = selectPlantFromGarden(scanner, Garden.getPlantsToPlant());
+
+                    //The plant is too big for the 1x1 foot square
+                    if (plant.getPlantSpacing() > 12) {
+                        System.out.println("The plant is too big for this garden.");
+                        break;
+                    }
+
+                    int addCoord = UIUtility.chooseCoords(scanner);
+
+                    int[] AddXY = UIUtility.coordsFromSelection(addCoord);
+
+                    if (!coords[AddXY[0]][AddXY[1]].isEmpty()) {
+                        System.out.println("Remove the plant before placing a new one.");
+                        break;
+                    }
+
+                    String name = plant.getPlantName();
+                    int nameLength = 11;
+
+                    // do some formating so the name fits in box
+                    if (name.length() >= nameLength) name = name.substring(0,   nameLength) +"...";                    
+                    else if (name.equals(null)) name = "";
+                    
+                    // set the array to the name
+                    coords[AddXY[0]][AddXY[1]] = name;
+                    
+                    // set the plant object's garden coords field
+                    plant.setGardenCoords(AddXY);
+
+                    
+                    break;
+                case 2:
+                    // remove
+                    int removeCoord = UIUtility.chooseCoords(scanner);
+                    int[] removeXY = UIUtility.coordsFromSelection(removeCoord);
+                    Garden.setGardenBedByCoord(removeXY, "");
+
+                    // remove the plant's coordinates field
+                    int index = Garden.getPlantIndexByCoord(removeXY);
+                    int[] nonCoords ={-1,-1};
+
+                    Garden.getGarden().get(index).setGardenCoords(nonCoords);
+                    
+                    break;
+                case 3:
+                    // swap
+                    System.out.print("First plant- ");
+                    int swap1Coord = UIUtility.chooseCoords(scanner);
+
+                    System.out.print("Second plant- ");
+                    int swap2Coord = UIUtility.chooseCoords(scanner);
+
+                    // swap in garden bed
+
+                    int[] swap1XY = UIUtility.coordsFromSelection(swap1Coord);
+                    int[] swap2XY = UIUtility.coordsFromSelection(swap2Coord);
+
+                    String temp1 = Garden.getGardenBedByCoord(swap1XY);
+
+                    Garden.setGardenBedByCoord(swap1XY, Garden.
+                        getGardenBedByCoord(swap2XY));
+                    
+                    Garden.setGardenBedByCoord(swap2XY, temp1);
+
+                    // set coords
+                    int swap1 = Garden.getPlantIndexByCoord(swap1XY);
+                    int swap2 = Garden.getPlantIndexByCoord(swap2XY);
+
+                    Garden.getGarden().get(swap1).setGardenCoords(swap2XY);
+                    Garden.getGarden().get(swap2).setGardenCoords(swap1XY);
+                    
+                    break;
+                case 4:
+                    // exit
+                    cont = false;
+                    break;
+            }            
+        }        
+    }
+
 
     public static void printNPause(Plant plant, Scanner scanner){
         System.out.println(plant.toString());
