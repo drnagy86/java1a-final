@@ -1,5 +1,4 @@
 package src;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 public class App {
@@ -43,6 +42,7 @@ public class App {
                     }
                     else{
                         Plant plant = selectPlantFromGarden(scanner,Garden.getGarden());
+                        if (plant == null) break;
                         plantFieldMenu(plant, scanner);
                         //UIUtility.pressEnterToContinue(scanner);
                     }
@@ -54,6 +54,7 @@ public class App {
                     }
                     else{                                                    
                         Plant plant = selectPlantFromGarden(scanner,Garden.getGarden());
+                        if (plant == null) break;
                         Garden.removePlant(plant);
                         System.out.println("Removed\n" + plant.toString());                          
                         UIUtility.pressEnterToContinue(scanner);                  
@@ -88,10 +89,9 @@ public class App {
         Plant plant = null;
         while (true) {
             choice = UIUtility.showMenuOptions("Garden" , "Choose a plant: ", menuOptions, scanner);
-            if (choice == 0)
-                continue;
-            if (choice == menuOptions.length + 1)
-                break;
+            if (choice == 0) continue;
+            if (choice == menuOptions.length + 1)break;
+                
             UIUtility.showSectionTitle(menuOptions[Integer.valueOf(choice) - 1]);
             // grab the plant that the user selected
 
@@ -205,6 +205,7 @@ public class App {
                 case 1:
                     //add
                     Plant plant = selectPlantFromGarden(scanner, Garden.getPlantsToPlant());
+                    if (plant == null) break;
 
                     //The plant is too big for the 1x1 foot square
                     if (plant.getPlantSpacing() > 12) {
